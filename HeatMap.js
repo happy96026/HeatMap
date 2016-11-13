@@ -1,5 +1,7 @@
 var width = 1000;
 var height = 950;
+var textHeight = 87;
+
 var color = ["rgb(247,251,255)",
 			"rgb(222,235,247)",
 			"rgb(198,219,239)",
@@ -24,11 +26,26 @@ var svg = d3.select("div")
 			.append("svg")
 			.attr("width", width)
 			.attr("height", height)
+
+d3.select("svg").append("text")
+	.attr("id", "title")
+	.attr("x", 5)
+	.attr("y", 50)
+	.style("font-size", "36px")
+	.text("Heat Map of Crimes in Edmonton");
 			
-		d3.select("svg").append("text")
-			.attr("x", 5)
-			.attr("y", 30)
-			.attr("fill", "white");
+d3.select("svg").append("text")
+	.attr("id", "text1")
+	.attr("x", 5)
+	.attr("y", textHeight);
+
+d3.select("svg").append("text")
+	.attr("id", "text2")
+	.attr("x", 5)
+	.attr("y", textHeight + 25)
+	.style("font-size", "20px");
+
+
 
 var g = svg.append("g");
 
@@ -67,8 +84,8 @@ d3.csv("data/data.csv", function(crimeData) {
 			.enter().append("path")
 			.attr("d", path)
 			.attr("fill", "rgb(204, 0, 0)")
+			.attr("stroke", "#fff")
 			.attr("opacity", colourmap)
-			.attr("stroke", "white")
 			.on("mouseover", function() {
 				d3.select(this)
 				.style("fill", "rgb(8,48,107)")
@@ -80,15 +97,18 @@ d3.csv("data/data.csv", function(crimeData) {
 						return scale(totalCrimeData[d.properties.name.toUpperCase()]) + 0.15;
 					}
 				});
-				d3.select("text")
+				d3.select("#text1")
 					.text(d3.select(this).data()[0].properties.name);
-
+				d3.select("#text2")
+					.text("Number of Crimes: " + 
+						totalCrimeData[d3.select(this).data()[0].properties.name.toUpperCase()]);
 			})
 			.on("mouseout", function() {
 				d3.select(this)
 				.style("fill", "rgb(204, 0, 0)")
 				.style("opacity", colourmap);
-				d3.select("text").text("");
+				d3.select("#text1").text("");
+				d3.select("#text2").text("");
 			});
 	});
 });
