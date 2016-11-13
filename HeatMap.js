@@ -12,7 +12,9 @@ var path = d3.geoPath()
 var svg = d3.select("div")
 			.append("svg")
 			.attr("width", width)
-			.attr("height", height);
+			.attr("height", height)
+			.attr("stroke", "#aaa")
+			.attr("fill", "pink");
 
 var g = svg.append("g");
 
@@ -22,7 +24,7 @@ d3.json("data/yeg.geojson", function(mapData) {
 	g.selectAll("path")
 		.data(features)
 		.enter().append("path")
-		.attr("d", path)
+		.attr("d", path);
 
 	console.log(features);
 });
