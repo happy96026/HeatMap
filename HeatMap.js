@@ -2,17 +2,16 @@ var width = 1000;
 var height = 950;
 var textHeight = 87;
 
-var color = ["rgb(247,251,255)",
-			"rgb(222,235,247)",
-			"rgb(198,219,239)",
-			"rgb(158,202,225)",
-			"rgb(107,174,214)",
-			"rgb(66,146,198)",
-			"rgb(33,113,181)",
-			"rgb(8,81,156)",
-			"rgb(8,48,107)"];
-
 var totalCrimeData = {};
+var typeCrimeData = {"Assault": 0, 
+                     "Break and Enter": 0,
+                     "Homicide": 0,
+                     "Robbery": 0,
+                     "Sexual Assaults": 0,
+                     "Theft From Vehicle": 0,
+                     "Theft Of Vehicle": 0,
+                     "Theft Over $5000": 0
+                    };
 
 var projection = d3.geoMercator()
 					.scale(100000)
@@ -45,19 +44,18 @@ d3.select("svg").append("text")
 	.attr("y", textHeight + 25)
 	.style("font-size", "20px");
 
-
-
 var g = svg.append("g");
 
 
 d3.csv("data/data.csv", function(crimeData) {
 	for (i = 0; i < crimeData.length; i++) {
-		if (!(crimeData[i].neighbourhood in totalCrimeData)) {
-			totalCrimeData[crimeData[i].neighbourhood] = parseInt(crimeData[i].no_of_crime);
-		}
-		else {
-			totalCrimeData[crimeData[i].neighbourhood] += parseInt(crimeData[i].no_of_crime);	
-		}
+      if (!(crimeData[i].neighbourhood in totalCrimeData)) {
+        totalCrimeData[crimeData[i].neighbourhood] = parseInt(crimeData[i].no_of_crime);
+        
+      }
+      else {
+        totalCrimeData[crimeData[i].neighbourhood] += parseInt(crimeData[i].no_of_crime);	
+      }
 	}
 	var arr = Object.keys(totalCrimeData).map(function(key) {return totalCrimeData[key];});
 	var min = Math.min.apply(null, arr);
@@ -88,15 +86,8 @@ d3.csv("data/data.csv", function(crimeData) {
 			.attr("opacity", colourmap)
 			.on("mouseover", function() {
 				d3.select(this)
-				.style("fill", "rgb(8,48,107)")
-				.style("opacity", function(d) {
-					if (totalCrimeData[d.properties.name.toUpperCase()] == undefined) {
-						return 0.15;
-					}
-					else {
-						return scale(totalCrimeData[d.properties.name.toUpperCase()]) + 0.15;
-					}
-				});
+				.style("fill", "rgb(240,200,200)")
+				.style("opacity", 100)
 				d3.select("#text1")
 					.text(d3.select(this).data()[0].properties.name);
 				d3.select("#text2")
