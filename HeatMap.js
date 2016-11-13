@@ -1,6 +1,6 @@
 var width = 1000;
 var height = 950;
-var textHeight = 87;
+var textHeight = 78;
 
 var totalCrimeData = {};
 var typeCrimeData = {"Assault": 0, 
@@ -32,65 +32,72 @@ d3.select("svg").append("text")
 	.attr("y", 50)
 	.style("font-size", "36px")
 	.text("Heat Map of Crimes in Edmonton");
+
+d3.select("svg").append("text")
+  .attr("id", "title1")
+  .attr("x", 295)
+  .attr("y", textHeight)
+  .style("font-size", "20px")
+  .text("January 2009 to June 2016");
 			
 d3.select("svg").append("text")
 	.attr("id", "text1")
 	.attr("x", 5)
-	.attr("y", textHeight)
+	.attr("y", textHeight + 30)
   .style("font-size", "30px");
 
 d3.select("svg").append("text")
 	.attr("id", "text2")
 	.attr("x", 5)
-	.attr("y", textHeight + 30)
+	.attr("y", textHeight + 60)
 	.style("font-size", "25px");
 
 d3.select("svg").append("text")
   .attr("id", "text3")
   .attr("x", 5)
-  .attr("y", textHeight + 60)
+  .attr("y", textHeight + 90)
   .style("font-size", "20px");
 
 d3.select("svg").append("text")
   .attr("id", "text4")
   .attr("x", 5)
-  .attr("y", textHeight + 80)
+  .attr("y", textHeight + 110)
   .style("font-size", "20px");
 
 d3.select("svg").append("text")
   .attr("id", "text5")
   .attr("x", 5)
-  .attr("y", textHeight + 100)
+  .attr("y", textHeight + 130)
   .style("font-size", "20px");
 
 d3.select("svg").append("text")
   .attr("id", "text6")
   .attr("x", 5)
-  .attr("y", textHeight + 120)
+  .attr("y", textHeight + 150)
   .style("font-size", "20px");
 
 d3.select("svg").append("text")
   .attr("id", "text7")
   .attr("x", 5)
-  .attr("y", textHeight + 140)
+  .attr("y", textHeight + 170)
   .style("font-size", "20px");
 
 d3.select("svg").append("text")
   .attr("id", "text8")
   .attr("x", 5)
-  .attr("y", textHeight + 160)
+  .attr("y", textHeight + 190)
   .style("font-size", "20px");
 
 d3.select("svg").append("text")
   .attr("id", "text9")
   .attr("x", 5)
-  .attr("y", textHeight + 180)
+  .attr("y", textHeight + 210)
   .style("font-size", "20px");
 
 d3.select("svg").append("text")
   .attr("id", "text10")
   .attr("x", 5)
-  .attr("y", textHeight + 200)
+  .attr("y", textHeight + 230)
   .style("font-size", "20px");
 
 var g = svg.append("g");
